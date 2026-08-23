@@ -1,0 +1,22 @@
+const express = require('express');
+const router = express.Router();
+const {
+  registerUser,
+  verifyOtp,
+  resendOtp,
+  googleAuth,
+  loginUser,
+  loginAdmin,
+  getMe
+} = require('../controllers/authController');
+const { protect } = require('../middleware/authMiddleware');
+
+router.post('/register', registerUser);
+router.post('/verify-otp', verifyOtp);
+router.post('/resend-otp', resendOtp);
+router.post('/google', googleAuth);
+router.post('/login', loginUser);
+router.post('/admin/login', loginAdmin);
+router.get('/me', protect, getMe);
+
+module.exports = router;
